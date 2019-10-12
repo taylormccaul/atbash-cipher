@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Atbash Cipher</title>
+        <meta charset="utf-8">
+        <style>
+        </style>
+    </head>
+    <body>
+        <h1 id="cipher-text"></h1>
+        <input type="text" name="plain-text" id="plain-text">
+        <button type="submit" name="encrypt-submit" id="encrypt-submit">Submit</button>
+        <script>
+            let plainTextInput = document.getElementById("plain-text").value;
+            let encBtn = document.getElementById("encrypt-submit");
+
+            let cipherPreview = document.getElementById("cipher-text");
+
+            let plainTextArr = ("abcdefghijklmnopqrstuvwxyz").split("");
+            let cipherTextArr = ("zyxwvutsrqponmlkjihgfedcba").split("");
+
+            let encodeArr = [];
+
+            encBtn.addEventListener("click", encode);
+
+            function encode() {
+                plainTextInput = document.getElementById("plain-text").value;
+
+                for (let i = 0; i < plainTextInput.length; i++) {
+                    if (plainTextArr.includes(plainTextInput.charAt(i))) {
+                        for (let j = 0; j < plainTextArr.length; j++) {
+                            if (plainTextArr[j] === plainTextInput[i]) {
+                                console.log(cipherTextArr[j]);
+                                encodeArr.push(cipherTextArr[j]);
+                                console.log(encodeArr);
+                            }
+                        }
+                        //console.log(plainTextArr.indexOf(i));
+                        //console.log(`${plainTextArr[i]} is equal to ${cipherTextArr[i]}`);
+                        //console.log(i);
+                    }
+                    encodeArr = encodeArr.replace(/\W/, "");
+                    cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr}`;
+                }
+            }
+        </script>
+    </body>
+</html>
