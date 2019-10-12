@@ -10,21 +10,26 @@
         <h1 id="cipher-text"></h1>
         <input type="text" name="plain-text" id="plain-text">
         <button type="submit" name="encrypt-submit" id="encrypt-submit">Submit</button>
+        
+        <button type="submit" name="decrypt-submit" id="decrypt-submit">Submit</button>
         <script>
             let plainTextInput = document.getElementById("plain-text").value;
             let encBtn = document.getElementById("encrypt-submit");
+
+            let decBtn = document.getElementById("decrypt-submit");
 
             let cipherPreview = document.getElementById("cipher-text");
 
             let plainTextArr = ("abcdefghijklmnopqrstuvwxyz").split("");
             let cipherTextArr = ("zyxwvutsrqponmlkjihgfedcba").split("");
 
-            let encodeArr = [];
+            let encodeArr = [""];
 
             encBtn.addEventListener("click", encode);
 
             function encode() {
                 plainTextInput = document.getElementById("plain-text").value;
+                encodeArr = [""];
 
                 for (let i = 0; i < plainTextInput.length; i++) {
                     if (plainTextArr.includes(plainTextInput.charAt(i))) {
@@ -35,14 +40,40 @@
                                 console.log(encodeArr);
                             }
                         }
-                        //console.log(plainTextArr.indexOf(i));
-                        //console.log(`${plainTextArr[i]} is equal to ${cipherTextArr[i]}`);
-                        //console.log(i);
                     }
-                    encodeArr = encodeArr.replace(/\W/, "");
-                    cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr}`;
                 }
+
+                for (let i = 1; i < encodeArr.length; i++) {
+                    if (i % 6 === 0) {
+                        encodeArr.splice(i, 0, " ");
+                    }
+                }
+                cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr.join("")}`;
             }
+
+            function decode() {
+                plainTextInput = document.getElementById("plain-text").value;
+                encodeArr = [""];
+                
+                for (let i = 0; i < plainTextInput.length; i++) {
+                    if (cipherTextArr.includes(plainTextInput.charAt(i))) {
+                        for (let j = 0; j < cipherTextArr.length; j++) {
+                            if (cipherTextArr[j] === plainTextInput[i]) {
+                                console.log(plainTextArr[j]);
+                                encodeArr.push(plainTextArr[j]);
+                                console.log(encodeArr);
+                            }
+                        }
+                    }
+                }
+                cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr.join("")}`;
+            }
+            //console.log(plainTextArr.indexOf(i));
+            //console.log(`${plainTextArr[i]} is equal to ${cipherTextArr[i]}`);
+            //console.log(i);
+            //console.log(encodeArr.join(""));
+            //encodeArr.join("");
+            //encodeArr = encodeArr.replace(/\W/, "");
         </script>
     </body>
 </html>
