@@ -9,9 +9,9 @@
     <body>
         <h1 id="cipher-text"></h1>
         <input type="text" name="plain-text" id="plain-text">
-        <button type="submit" name="encrypt-submit" id="encrypt-submit">Submit</button>
+        <button type="submit" name="encrypt-submit" id="encrypt-submit">Encrypt</button>
         
-        <button type="submit" name="decrypt-submit" id="decrypt-submit">Submit</button>
+        <button type="submit" name="decrypt-submit" id="decrypt-submit">Decrypt</button>
         <script>
             let plainTextInput = document.getElementById("plain-text").value;
             let encBtn = document.getElementById("encrypt-submit");
@@ -20,23 +20,24 @@
 
             let cipherPreview = document.getElementById("cipher-text");
 
-            let plainTextArr = ("abcdefghijklmnopqrstuvwxyz").split("");
-            let cipherTextArr = ("zyxwvutsrqponmlkjihgfedcba").split("");
+            let plainTextArr = ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYS").split("");
+            let cipherTextArr = ("zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA").split("");
 
             let encodeArr = [""];
 
             encBtn.addEventListener("click", encode);
+            decBtn.addEventListener("click", decode);
 
-            function encode() {
+            function code(inputArr, outputArr) {
                 plainTextInput = document.getElementById("plain-text").value;
                 encodeArr = [""];
 
                 for (let i = 0; i < plainTextInput.length; i++) {
-                    if (plainTextArr.includes(plainTextInput.charAt(i))) {
-                        for (let j = 0; j < plainTextArr.length; j++) {
-                            if (plainTextArr[j] === plainTextInput[i]) {
-                                console.log(cipherTextArr[j]);
-                                encodeArr.push(cipherTextArr[j]);
+                    if (inputArr.includes(plainTextInput.charAt(i))) {
+                        for (let j = 0; j < inputArr.length; j++) {
+                            if (inputArr[j] === plainTextInput[i]) {
+                                console.log(outputArr[j]);
+                                encodeArr.push(outputArr[j]);
                                 console.log(encodeArr);
                             }
                         }
@@ -48,32 +49,28 @@
                         encodeArr.splice(i, 0, " ");
                     }
                 }
-                cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr.join("")}`;
+            }
+
+            function preview() {
+                return cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr.join("").toLowerCase()}`;
+            }
+
+            function encode() {
+                code(plainTextArr, cipherTextArr);
+                preview();
             }
 
             function decode() {
-                plainTextInput = document.getElementById("plain-text").value;
-                encodeArr = [""];
-                
-                for (let i = 0; i < plainTextInput.length; i++) {
-                    if (cipherTextArr.includes(plainTextInput.charAt(i))) {
-                        for (let j = 0; j < cipherTextArr.length; j++) {
-                            if (cipherTextArr[j] === plainTextInput[i]) {
-                                console.log(plainTextArr[j]);
-                                encodeArr.push(plainTextArr[j]);
-                                console.log(encodeArr);
-                            }
-                        }
+                code(cipherTextArr, plainTextArr);
+
+                for (let i = 0; i < encodeArr.length; i++) {
+                    if (encodeArr[i] == " ") {
+                        encodeArr.splice(i, 1);
                     }
                 }
-                cipherPreview.innerHTML = `${plainTextInput} is equal to ${encodeArr.join("")}`;
+
+                preview();
             }
-            //console.log(plainTextArr.indexOf(i));
-            //console.log(`${plainTextArr[i]} is equal to ${cipherTextArr[i]}`);
-            //console.log(i);
-            //console.log(encodeArr.join(""));
-            //encodeArr.join("");
-            //encodeArr = encodeArr.replace(/\W/, "");
         </script>
     </body>
 </html>
