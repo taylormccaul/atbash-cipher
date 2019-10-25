@@ -9,7 +9,6 @@
          function caesar(string, shift = 0) {
                 let letterArr = ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
                 let caesarArr = [];
-
                 for (let i = 0; i < string.length; i++) {
                     if (letterArr.includes(string[i]) && 
                     string.charCodeAt(i) + shift < 91 &&
@@ -22,14 +21,13 @@
                         console.log(string.charCodeAt(i));
                         //console.log(String.fromCharCode(string.charCodeAt(i) + 53));
                     }
-                }*/
-
+                }
                 /*for (let i = 0; i < 123; i++) {
                     if (i > 64 && i < 91 || i > 64 && i > 96) {
                         console.log(String.fromCharCode(i));
                         console.log(i);
                     }
-                }
+                }*/
             }
      </script>
   </html>
