@@ -6,28 +6,37 @@
      <head>
      <body>
        <script>
-         function caesar(string, shift = 0) {
-                let letterArr = ("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ").split("");
-                let caesarArr = [];
-                for (let i = 0; i < string.length; i++) {
-                    if (letterArr.includes(string[i]) && 
-                    string.charCodeAt(i) + shift < 91 &&
-                    string.charCodeAt(i) + shift > 64 || 
-                    letterArr.includes(string[i]) && 
-                    string.charCodeAt(i) + shift > 96) {
-                        console.log(String.fromCharCode(string.charCodeAt(i) + shift));
-                        console.log(string.charCodeAt(i) + shift);
-                    } else {
-                        console.log(string.charCodeAt(i));
-                        //console.log(String.fromCharCode(string.charCodeAt(i) + 53));
-                    }
-                }
-                /*for (let i = 0; i < 123; i++) {
-                    if (i > 64 && i < 91 || i > 64 && i > 96) {
-                        console.log(String.fromCharCode(i));
-                        console.log(i);
-                    }
-                }*/
-            }
+function rot13(str) {
+str = str.toUpperCase();
+let cipherString = ""
+let strCharCode;
+let nonAlph = /\W|_|\?|@|\s/;
+  for (let index = 0; index < str.length; index++) {
+    strCharCode = String.fromCharCode(str.charCodeAt(index) - 13);
+    console.log(str.charCodeAt(index) - 13);
+
+    if (str[index].match(nonAlph)) {
+      cipherString += str[index];
+      continue;
+    }
+
+    if (str.charCodeAt(index) === 32) {
+      cipherString += str[index].trim();
+    } else if (strCharCode < 65) {
+      cipherString += String.fromCharCode(str.charCodeAt(index) + 13);
+    } else if (str.charCodeAt(index) >= 71 && str.charCodeAt(index) <= 77) {
+      cipherString += String.fromCharCode(str.charCodeAt(index) + 13);
+    }
+      else if (strCharCode > 90) {
+      cipherString += String.fromCharCode(str.charCodeAt(index) - 12)
+    }
+      else {
+      cipherString += strCharCode;
+    }
+  }
+  return cipherString;
+}
+
+console.log(rot13("GUR DHVPX OEBJA SBK WHZCF BIRE GUR YNML QBT."));
      </script>
   </html>
